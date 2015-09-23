@@ -1,0 +1,12 @@
+{% extends 'base_phonebook.html' %}
+{% load static %}
+{% block title %} Lista Contactos {% endblock title %}
+{% block content %}
+    <h1 style="padding-bottom: 20px" class="text-center">Lista de Contactos</h1>
+    <form method="post" action=".">
+    {% csrf_token %}
+        {{ form.as_p }}
+    <input type="submit" value="Guardar" class="btn btn-primary">
+    <a href="{% url 'phonebook:list' %}" class="btn btn-default"> Regresar</a>
+    </form>
+{% endblock content %}

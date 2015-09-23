@@ -1,0 +1,39 @@
+{% extends 'base_phonebook.html' %}
+{% load static %}
+{% block title %} Lista Contactos {% endblock title %}
+{% block content %}
+    <h1 style="padding-bottom: 20px" class="text-center">Lista de Contactos</h1>
+    {% if object_list %}
+        <a href="{% url 'phonebook:new' %}" class="btn btn-default" style="float:right; margin-bottom: 20px">Agregar nuevo</a>
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Número telefónico</th>
+                    <th>Acerca del contacto</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for contact in object_list %}
+                    <tr>
+                        <td>{{ contact.first_name }}</td>
+                        <td>{{ contact.last_name }}</td>
+                        <td>{{ contact.phone_number }}</td>
+                        <td>{{ contact.about }}</td>
+                        <td>
+                            <a href="{% url 'phonebook:delete' contact.id %}"><i class="glyphicon glyphicon-trash" style="color:darkred"></i></a>
+                            <a href="{% url 'phonebook:edit' contact.id %}"><i class="glyphicon glyphicon-pencil" style="color:darkblue; margin-left: 20px"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h2 class="text-center">Aún no tienes contactos en la base de datos</h2>
+        <div class="text-center">
+        <a href="{% url 'phonebook:new' %}" class="btn btn-primary text-center">Agregar nuevo</a>
+        </div>
+    {% endif %}
+{% endblock content %}
